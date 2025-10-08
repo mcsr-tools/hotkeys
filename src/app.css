@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+
+body::before {
+	content: '';
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+
+	--g1: #3a405a;
+	--g2: #a49080;
+	background-image:
+		radial-gradient(circle farthest-side at top right, transparent, var(--g1)),
+		radial-gradient(ellipse farthest-corner at 0% 100%, transparent, var(--g2));
+	background-blend-mode: screen;
+	animation: hue 67s infinite;
+}
+
+@keyframes hue {
+	0%,
+	100% {
+		filter: hue-rotate(0deg);
+	}
+	50% {
+		filter: hue-rotate(-45deg);
+	}
+}
