@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import * as H from '$lib/components/hotkeys';
 	import * as M from '$lib/components/hotkeys/macro';
 	import { hotkeysState } from '$lib/state.svelte';
@@ -58,7 +59,7 @@
 			class="flex items-end justify-end overflow-visible bg-transparent backdrop-blur-none"
 		>
 			<p class="col-span-full text-sm font-extralight text-amber-950 xl:text-xl">
-				mcsr.tools/hotkeys •
+				<a class="underline" href={resolve('/')}>mcsr.tools/hotkeys</a> •
 				<a class="underline" href="https://github.com/mcsr-tools/hotkeys" target="_blank">
 					source
 				</a>
