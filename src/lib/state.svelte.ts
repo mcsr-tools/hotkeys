@@ -1,3 +1,7 @@
+export const uiState = $state({
+	background: '#3a405a'
+});
+
 export const profileState = $state({
 	nickname: 'Yatqo'
 });

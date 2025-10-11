@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+:root {
+	--background: #3a405a;
+}
+
 body::before {
 	content: '';
 	position: fixed;
@@ -7,13 +11,14 @@ body::before {
 	height: 100%;
 	z-index: -1;
 
-	--g1: #3a405a;
-	--g2: #a49080;
 	background-image:
-		radial-gradient(circle farthest-side at top right, transparent, var(--g1)),
-		radial-gradient(ellipse farthest-corner at 0% 100%, transparent, var(--g2));
+		radial-gradient(circle farthest-side at top right, transparent, var(--background)),
+		radial-gradient(ellipse farthest-corner at 0% 100%, transparent, #a69a8f);
 	background-blend-mode: screen;
-	animation: hue 67s infinite;
+	filter: grayscale(1);
+	animation:
+		hue 67s infinite,
+		intro 1s ease;
 }
 
 @keyframes hue {
@@ -24,4 +29,26 @@ body::before {
 	50% {
 		filter: hue-rotate(-45deg);
 	}
+}
+
+@keyframes intro {
+	from {
+		filter: grayscale(1);
+	}
+	to {
+		filter: grayscale(0);
+	}
+}
+
+input[type='color']::-moz-color-swatch {
+	border: none;
+}
+
+input[type='color']::-webkit-color-swatch-wrapper {
+	padding: 0;
+	border-radius: 0;
+}
+
+input[type='color']::-webkit-color-swatch {
+	border: none;
 }
