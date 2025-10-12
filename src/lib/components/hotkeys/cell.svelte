@@ -11,7 +11,7 @@
 
 <div
 	class={twMerge(
-		'h-full max-w-full overflow-scroll rounded-2xl bg-white/30 backdrop-blur-sm',
+		'h-full max-w-full rounded-2xl bg-white/30 backdrop-blur-sm',
 		props.class
 	)}
 	style={`--size: ${props.size}`}
