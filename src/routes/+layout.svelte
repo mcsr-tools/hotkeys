@@ -15,5 +15,10 @@
 </svelte:head>
 
 <main class="container mx-auto px-2 pt-6">
-	{@render children?.()}
+	<div class="rounded-2xl bg-white/30 p-4 text-black drop-shadow-xl backdrop-blur-sm lg:hidden">
+		Your current resolution is not supported. Please view this page in desktop mode.
+	</div>
+	<div class="hidden lg:block">
+		{@render children?.()}
+	</div>
 </main>

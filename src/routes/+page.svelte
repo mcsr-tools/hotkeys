@@ -6,7 +6,7 @@
 
 <Visualizer />
 
-<div class="mt-10 hidden items-center gap-2 lg:flex">
+<div class="mt-10 items-center gap-2 flex">
 	<input
 		class="size-8 rounded-full border-2 border-black hover:cursor-pointer"
 		type="color"
