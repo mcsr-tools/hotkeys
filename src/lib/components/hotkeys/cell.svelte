@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import { type Snippet } from 'svelte';
 	import { twMerge } from 'tailwind-merge';
 
 	const props: {
@@ -10,10 +10,7 @@
 </script>
 
 <div
-	class={twMerge(
-		'h-full max-w-full rounded-2xl bg-white/30 backdrop-blur-sm',
-		props.class
-	)}
+	class={twMerge('h-full max-w-full rounded-2xl bg-white/30 backdrop-blur-sm', props.class)}
 	style={`--size: ${props.size}`}
 >
 	{@render props.children?.()}

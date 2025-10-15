@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { getHotkeysContext } from '$lib/hotkeys.context';
 	import { profileState } from '$lib/state.svelte';
+
+	const ctx = getHotkeysContext();
 
 	let nickname = $state(profileState.nickname);
 
@@ -16,6 +19,7 @@
 		<input
 			class="inline-block text-center"
 			type="text"
+			disabled={ctx?.editable === false}
 			bind:value={nickname}
 			defaultValue={nickname}
 			onblur={commitNickname}

@@ -4,6 +4,11 @@
 	import Visualizer from '$lib/components/visualizer.svelte';
 	import { replaceState } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import { setHotkeysContext } from '$lib/hotkeys.context';
+
+	setHotkeysContext({
+		editable: false
+	});
 
 	$effect.pre(() => {
 		const { profile, hotkeys, ui } = JSON.parse(atob(page.params.slug!));
