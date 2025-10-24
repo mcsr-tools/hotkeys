@@ -6,6 +6,20 @@
 	import { hotkeysState, profileState, uiState } from '$lib/state.svelte';
 
 	const session = authClient.useSession();
+
+	const hotkeysPage = $derived(
+		$session.data?.user.mcName
+			? resolve(`/u/${$session.data?.user.mcName}`)
+			: resolve(
+					`/v1/${btoa(
+						JSON.stringify({
+							hotkeys: hotkeysState,
+							profile: profileState,
+							ui: uiState
+						})
+					)}`
+				)
+	);
 </script>
 
 <Visualizer />
@@ -18,15 +32,7 @@
 	/>
 	<a
 		class="rounded-2xl bg-linear-to-r from-emerald-200 to-emerald-50 px-3 py-1 font-light text-neutral-800 drop-shadow-lg transition-all hover:from-emerald-300 hover:to-emerald-100 hover:drop-shadow-xl"
-		href={resolve(
-			`/v1/${btoa(
-				JSON.stringify({
-					hotkeys: hotkeysState,
-					profile: profileState,
-					ui: uiState
-				})
-			)}`
-		)}
+		href={hotkeysPage}
 	>
 		View your hotkeys page
 	</a>

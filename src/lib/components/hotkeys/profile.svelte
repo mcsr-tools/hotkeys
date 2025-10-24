@@ -19,7 +19,7 @@
 		<input
 			class="inline-block text-center"
 			type="text"
-			disabled={ctx?.editable === false}
+			disabled={ctx && !ctx.isEditable('profile')}
 			bind:value={nickname}
 			defaultValue={nickname}
 			onblur={commitNickname}

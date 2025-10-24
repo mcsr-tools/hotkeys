@@ -7,7 +7,7 @@
 	import { setHotkeysContext } from '$lib/hotkeys.context';
 
 	setHotkeysContext({
-		editable: false
+		isEditable: (name) => false
 	});
 
 	$effect.pre(() => {
