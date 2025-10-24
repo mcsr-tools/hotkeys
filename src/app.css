@@ -4,6 +4,11 @@
 	--background: #3a405a;
 }
 
+@theme {
+	--font-mc: 'Minecraft';
+	--color-mc: #228b22;
+}
+
 body::before {
 	content: '';
 	position: fixed;
@@ -51,4 +56,11 @@ input[type='color']::-webkit-color-swatch-wrapper {
 
 input[type='color']::-webkit-color-swatch {
 	border: none;
+}
+
+@font-face {
+	font-family: 'Minecraft';
+	font-style: normal;
+	font-weight: normal;
+	src: url('$lib/assets/MinecraftRegular.otf');
 }
