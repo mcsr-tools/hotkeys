@@ -1,7 +1,7 @@
 import { getContext, setContext } from 'svelte';
 
 type Context = {
-	editable: boolean;
+	isEditable: (name?: string) => boolean;
 };
 
 const key = 'hotkeys';
