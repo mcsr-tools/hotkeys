@@ -9,6 +9,12 @@
 	--color-mc: #228b22;
 }
 
+@layer components {
+	.action-bar {
+		@apply mt-10 inline-flex h-20 items-center gap-2 rounded-xl bg-neutral-950/75 px-6 py-4 text-neutral-200;
+	}
+}
+
 body::before {
 	content: '';
 	position: fixed;

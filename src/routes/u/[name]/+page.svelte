@@ -1,16 +1,18 @@
 <script lang="ts">
-	import { page } from '$app/state';
+	import { authClient } from '$lib/auth/client';
+	import { hotkeysState, uiState } from '$lib/state.svelte';
 	import Visualizer from '$lib/components/visualizer.svelte';
 	import { setHotkeysContext } from '$lib/hotkeys.context';
-	import { profileState } from '$lib/state.svelte';
+	import { addHotkeys } from './hotkeys.remote';
 
-	if (page.params.name) {
-		profileState.nickname = page.params.name;
-	}
+	const session = authClient.useSession();
+	let { params, data } = $props();
 
 	setHotkeysContext({
-		isEditable: (name) => name !== 'profile'
+		isEditable: () => false,
 	});
+
+	Object.assign(hotkeysState, data.hotkeys.json_data);
 </script>
 
 <Visualizer />

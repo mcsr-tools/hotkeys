@@ -3,7 +3,9 @@
 	"name": "mcsrtools-hotkeys",
 	"main": ".svelte-kit/cloudflare/_worker.js",
 	"compatibility_date": "2025-10-04",
-	"compatibility_flags": ["nodejs_als"],
+	"compatibility_flags": [
+		"nodejs_als"
+	],
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
@@ -15,6 +17,13 @@
 		{
 			"pattern": "mcsr.tools/hotkeys*",
 			"zone_name": "mcsr.tools"
+		}
+	],
+	"d1_databases": [
+		{
+			"database_id": "7265583c-cc7e-4ee7-a03a-5ef995a8d494",
+			"database_name": "mcsrt-hotkeys",
+			"binding": "DB"
 		}
 	]
 }
