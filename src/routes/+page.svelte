@@ -2,8 +2,8 @@
 	import { resolve } from '$app/paths';
 	import { authClient, signInWithMinecraft } from '$lib/auth/client';
 	import CreeperFace from '$lib/components/creeper-face.svelte';
-	import Visualizer from '$lib/components/visualizer.svelte';
 	import { hotkeysState, profileState, uiState } from '$lib/state.svelte';
+	import { getHotkeysList } from './data.remote';
 
 	const session = authClient.useSession();
 
@@ -26,7 +26,32 @@
 	<title>MCSR Hotkeys</title>
 </svelte:head>
 
-<Visualizer />
+{#snippet bust(props: { mcName: string })}
+	<section class="w-60 rounded-4xl bg-white/20 drop-shadow-xl backdrop-blur-sm">
+		<h3 class="mt-8 text-center">
+			<a
+				class="rounded-2xl bg-white/30 px-4 py-2 font-mc text-sm tracking-wide backdrop-blur-sm xl:text-xl"
+				href={resolve(`/u/${props.mcName}`)}
+			>
+				{props.mcName} &rarr;
+			</a>
+		</h3>
+		<img
+			class="mx-auto mt-4 mb-1 max-h-80 object-cover"
+			src={`https://nmsr.nickac.dev/fullbodyiso/${props.mcName}`}
+			alt={props.mcName}
+		/>
+	</section>
+{/snippet}
+
+<div>
+	<h2 class="text-3xl font-extralight tracking-wide">Latest Hotkeys</h2>
+	<div class="mt-5 flex gap-8">
+		{#each await getHotkeysList() as hk}
+			{@render bust(hk)}
+		{/each}
+	</div>
+</div>
 
 <div class="action-bar">
 	<input
