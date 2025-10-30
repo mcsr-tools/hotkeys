@@ -54,17 +54,7 @@
 </div>
 
 <div class="action-bar">
-	<input
-		class="size-8 rounded-full border-2 border-white hover:cursor-pointer"
-		type="color"
-		bind:value={uiState.background}
-	/>
-	<a
-		class="rounded-2xl bg-linear-to-r from-emerald-200 to-emerald-50 px-3 py-1 font-light text-neutral-800 drop-shadow-lg transition-all hover:from-emerald-300 hover:to-emerald-100 hover:drop-shadow-xl"
-		href={hotkeysPage}
-	>
-		View your hotkeys page
-	</a>
+	<a class="btn" href={hotkeysPage}> View your hotkeys page </a>
 	{#if $session.isPending}
 		<span class="text-neutral-200">loading...</span>
 	{:else if $session.data}

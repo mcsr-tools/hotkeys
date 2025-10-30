@@ -17,7 +17,7 @@
 >
 	<div class="text-sm text-neutral-100 xl:text-xl">
 		<input
-			class="inline-block text-center"
+			class="inline-block text-center font-mc"
 			type="text"
 			disabled={ctx && !ctx.isEditable('profile')}
 			bind:value={nickname}

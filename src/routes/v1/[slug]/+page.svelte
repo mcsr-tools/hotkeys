@@ -4,11 +4,17 @@
 	import Visualizer from '$lib/components/visualizer.svelte';
 	import { replaceState } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { setHotkeysContext } from '$lib/hotkeys.context';
+	import toast from 'svelte-french-toast';
 
-	setHotkeysContext({
-		isEditable: (name) => false
-	});
+	const newSlug = $derived(
+		btoa(
+			JSON.stringify({
+				profile: profileState,
+				hotkeys: hotkeysState,
+				ui: uiState
+			})
+		)
+	);
 
 	$effect.pre(() => {
 		const { profile, hotkeys, ui } = JSON.parse(atob(page.params.slug!));
@@ -21,16 +27,6 @@
 		}
 	});
 
-	const newSlug = $derived(
-		btoa(
-			JSON.stringify({
-				profile: profileState,
-				hotkeys: hotkeysState,
-				ui: uiState
-			})
-		)
-	);
-
 	$effect(() => {
 		// tmp workaround for thrown error `Cannot call replaceState(...) before router is initialized`
 		try {
@@ -39,6 +35,26 @@
 			void 0; // noop
 		}
 	});
+
+	async function copyUrl() {
+		toast.promise(
+			globalThis.navigator.clipboard.writeText(globalThis.window.location.toString()),
+			{
+				loading: 'Copying...',
+				success: 'URL copied to clipboard!',
+				error: 'Failed to copy to clipboard :('
+			},
+			{
+				position: 'top-center'
+			}
+		);
+	}
 </script>
 
 <Visualizer />
+
+<div class="action-bar">
+	<input class="input-color" type="color" bind:value={uiState.background} />
+	<button class="btn" type="button" onclick={copyUrl}>Copy your hotkeys page URL</button>
+	<span>or share this page which is automatically updated</span>
+</div>

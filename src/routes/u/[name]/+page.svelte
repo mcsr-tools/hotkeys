@@ -1,7 +1,7 @@
 <script lang="ts">
 	import toast from 'svelte-french-toast';
 	import { authClient } from '$lib/auth/client';
-	import { hotkeysState, uiState } from '$lib/state.svelte';
+	import { hotkeysState, profileState, uiState } from '$lib/state.svelte';
 	import Visualizer from '$lib/components/visualizer.svelte';
 	import { setHotkeysContext } from '$lib/hotkeys.context';
 	import { saveHotkeys } from './hotkeys.remote';
@@ -13,6 +13,8 @@
 
 	if (data.hotkeys) {
 		Object.assign(hotkeysState, data.hotkeys.jsonData);
+		uiState.background = data.hotkeys.jsonMeta.bgColor
+		profileState.nickname = data.hotkeys.mcName
 	}
 
 	setHotkeysContext({
@@ -65,6 +67,7 @@
 
 {#if $session.data?.user.mcName?.toLowerCase() === params.name.toLowerCase() && !isNew}
 	<div class="action-bar">
+		<input class="input-color" type="color" bind:value={uiState.background} />
 		<button class="btn" onclick={save}>
 			{#if isNew}Create{:else}Save your hotkeys{/if}
 		</button>
