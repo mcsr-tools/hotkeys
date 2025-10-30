@@ -1,5 +1,7 @@
+import { sql } from 'kysely';
 import { getDatabase } from '$lib/server/db';
 import { error } from '@sveltejs/kit';
+import { getSession } from '$lib/server/query';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async (event) => {
@@ -8,14 +10,28 @@ export const load: PageServerLoad = async (event) => {
 	const hotkeys = await db
 		.selectFrom('hotkey')
 		.selectAll()
-		.where('mc_name', '=', event.params.name)
+		.where((eb) => eb(eb.fn('lower', ['mcName']), '=', sql`lower(${event.params.name})`))
 		.executeTakeFirst();
 
-	if (!hotkeys) {
+	if (hotkeys) {
+		return {
+			hotkeys,
+			new: false
+		};
+	}
+
+	const { data: session } = await getSession();
+
+	if (
+		!session?.user ||
+		!session.user.mcName ||
+		session.user.mcName.toLowerCase() !== event.params.name.toLowerCase()
+	) {
 		error(404, 'Not Found');
 	}
 
 	return {
-		hotkeys
+		hotkeys: null,
+		new: true
 	};
 };

@@ -22,9 +22,13 @@
 	);
 </script>
 
+<svelte:head>
+	<title>MCSR Hotkeys</title>
+</svelte:head>
+
 <Visualizer />
 
-<div class="mt-10 inline-flex items-center gap-2 rounded-xl bg-neutral-950/75 p-4">
+<div class="action-bar">
 	<input
 		class="size-8 rounded-full border-2 border-white hover:cursor-pointer"
 		type="color"

@@ -54,8 +54,7 @@
 		class="flex items-end justify-end overflow-visible bg-transparent backdrop-blur-none"
 	>
 		<p class="col-span-full text-sm font-extralight text-amber-950 xl:text-xl">
-			<a class="underline" href={resolve('/')}>mcsr.tools/hotkeys</a> •
-			<a class="underline" href="https://github.com/mcsr-tools/hotkeys" target="_blank"> source </a>
+			<a href={resolve('/')}>mcsr.tools/hotkeys</a>
 		</p>
 	</H.Cell>
 </H.Root>
