@@ -1,32 +1,23 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { hotkeysState, profileState, uiState } from '$lib/state.svelte';
-	import Visualizer from '$lib/components/visualizer.svelte';
-	import { replaceState } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { setHotkeysContext } from '$lib/hotkeys.context';
+	import { replaceState } from '$app/navigation';
+	import { getHotkeysContext, getProfileContext, getUiContext } from '$lib/context.svelte';
+	import Visualizer from '$lib/components/visualizer.svelte';
+	import ActionBar from './action-bar.svelte';
 
-	setHotkeysContext({
-		editable: false
-	});
-
-	$effect.pre(() => {
-		const { profile, hotkeys, ui } = JSON.parse(atob(page.params.slug!));
-		Object.assign(hotkeysState, hotkeys);
-		Object.assign(profileState, profile);
-
-		// backwards compatibility
-		if (ui) {
-			Object.assign(uiState, ui);
-		}
-	});
+	const ctxProfile = getProfileContext();
+	const ctxHotkeys = getHotkeysContext();
+	const ctxUi = getUiContext();
 
 	const newSlug = $derived(
 		btoa(
 			JSON.stringify({
-				profile: profileState,
-				hotkeys: hotkeysState,
-				ui: uiState
+				// backwards compatibility
+				profile: {
+					nickname: ctxProfile.state.name
+				},
+				hotkeys: ctxHotkeys.state,
+				ui: ctxUi.state
 			})
 		)
 	);
@@ -42,3 +33,5 @@
 </script>
 
 <Visualizer />
+
+<ActionBar />

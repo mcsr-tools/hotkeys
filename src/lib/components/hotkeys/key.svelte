@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { getHotkeysContext } from '$lib/hotkeys.context';
 	import { twMerge } from 'tailwind-merge';
+	import { getVisualizerContext } from '$lib/context.svelte';
 
-	const ctx = getHotkeysContext();
+	const ctxVisualizer = getVisualizerContext();
 
 	let {
 		value = $bindable(),
@@ -16,9 +16,9 @@
 </script>
 
 <span
-	tabindex={ctx?.editable === false ? -1 : 0}
+	tabindex={ctxVisualizer && !ctxVisualizer.isEditable() ? -1 : 0}
 	role="textbox"
-	contenteditable={ctx?.editable === false ? 'false' : 'true'}
+	contenteditable={ctxVisualizer && !ctxVisualizer.isEditable() ? 'false' : 'true'}
 	onkeyup={({ currentTarget: { innerText } }) => (value = innerText)}
 	class={twMerge(
 		'lg:text-md flex min-h-8 items-center justify-center rounded-full bg-black px-2 py-0.5 text-sm text-nowrap text-white xl:px-4 xl:text-lg',

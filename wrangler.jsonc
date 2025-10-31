@@ -16,5 +16,12 @@
 			"pattern": "mcsr.tools/hotkeys*",
 			"zone_name": "mcsr.tools"
 		}
+	],
+	"d1_databases": [
+		{
+			"database_id": "7265583c-cc7e-4ee7-a03a-5ef995a8d494",
+			"database_name": "mcsrt-hotkeys",
+			"binding": "DB"
+		}
 	]
 }
