@@ -2,7 +2,6 @@
 	import { resolve } from '$app/paths';
 	import { authClient, signInWithMinecraft } from '$lib/auth/client';
 	import CreeperFace from '$lib/components/creeper-face.svelte';
-	import { hotkeysState, profileState, uiState } from '$lib/state.svelte';
 	import { getHotkeysList } from './data.remote';
 
 	const session = authClient.useSession();
@@ -13,9 +12,41 @@
 			: resolve(
 					`/v1/${btoa(
 						JSON.stringify({
-							hotkeys: hotkeysState,
-							profile: profileState,
-							ui: uiState
+							hotkeys: {
+								dropItem: 'Q',
+								inventory: 'E',
+								perspective: 'R',
+								sneak: 'Shift',
+								sprint: 'TGL',
+								f3: 'F3',
+								chat: 'T',
+								movement: {
+									forward: 'W',
+									backward: 'S',
+									left: 'A',
+									right: 'D'
+								},
+								hotbar: ['1', '2', '3', '4', '5', 'C', 'V', 'F', 'G'],
+								offHand: 'BCK',
+								interactions: {
+									attack: 'LMB',
+									use: 'RMB',
+									pick: 'MMB'
+								},
+								macro: {
+									wide: 'FWD',
+									thin: 'B',
+									eye: {
+										key: 'X',
+										dec: ',',
+										inc: '.',
+										reset: 'PGD'
+									}
+								}
+							},
+							profile: {
+								nickname: 'Yatqo'
+							}
 						})
 					)}`
 				)
@@ -47,14 +78,17 @@
 <div>
 	<h2 class="text-3xl font-extralight tracking-wide">Latest Hotkeys</h2>
 	<div class="mt-5 flex gap-8">
-		{#each await getHotkeysList() as hk}
+		{#each await getHotkeysList() as hk (hk.mcName)}
 			{@render bust(hk)}
 		{/each}
 	</div>
 </div>
 
 <div class="action-bar">
-	<a class="btn" href={hotkeysPage}> View your hotkeys page </a>
+	<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+	<a class="btn" href={hotkeysPage}>
+		{#if $session.data?.user.mcName}View your hotkeys page{:else}Create your hotkeys page{/if}
+	</a>
 	{#if $session.isPending}
 		<span class="text-neutral-200">loading...</span>
 	{:else if $session.data}

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import toast from 'svelte-french-toast';
 	import { authClient } from '$lib/auth/client';
-	import { hotkeysState, profileState, uiState } from '$lib/state.svelte';
+	import { getHotkeysContext, getUiContext } from '$lib/context.svelte';
 	import Visualizer from '$lib/components/visualizer.svelte';
-	import { setHotkeysContext } from '$lib/hotkeys.context';
+	import UiColorPicker from '$lib/components/ui-color-picker.svelte';
 	import { saveHotkeys } from './hotkeys.remote';
 
 	const session = authClient.useSession();
@@ -11,22 +11,15 @@
 	let { params, data } = $props();
 	let isNew = $state(data.new);
 
-	if (data.hotkeys) {
-		Object.assign(hotkeysState, data.hotkeys.jsonData);
-		uiState.background = data.hotkeys.jsonMeta.bgColor
-		profileState.nickname = data.hotkeys.mcName
-	}
-
-	setHotkeysContext({
-		isEditable: (name) => !!$session.data?.user && name !== 'profile'
-	});
+	const ctxUi = getUiContext();
+	const ctxHotkeys = getHotkeysContext();
 
 	async function save() {
 		await toast.promise(
 			saveHotkeys({
-				hotkeys: hotkeysState,
+				hotkeys: ctxHotkeys.state,
 				meta: {
-					bgColor: uiState.background
+					bgColor: ctxUi.state.background
 				}
 			}).then(() => {
 				isNew = false;
@@ -67,7 +60,7 @@
 
 {#if $session.data?.user.mcName?.toLowerCase() === params.name.toLowerCase() && !isNew}
 	<div class="action-bar">
-		<input class="input-color" type="color" bind:value={uiState.background} />
+		<UiColorPicker />
 		<button class="btn" onclick={save}>
 			{#if isNew}Create{:else}Save your hotkeys{/if}
 		</button>

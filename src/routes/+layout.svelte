@@ -3,13 +3,13 @@
 	import { Toaster } from 'svelte-french-toast';
 	import { resolve } from '$app/paths';
 	import favicon from '$lib/assets/favicon.svg';
-	import { uiState } from '$lib/state.svelte';
+	import { setUiContext } from '$lib/context.svelte';
 	import GithubCorner from '$lib/components/github-corner.svelte';
 
 	let { children } = $props();
 
-	$effect(() => {
-		document.body.style.setProperty('--background', uiState.background);
+	setUiContext({
+		background: '#3a405a'
 	});
 </script>
 

@@ -4,6 +4,7 @@
 	target="_blank"
 	aria-label="View source on GitHub"
 	data-credits="https://tholman.com/github-corners"
+	tabindex="-1"
 >
 	<svg class="fill-neutral-900" width={80} height={80} viewBox="0 0 250 250" aria-hidden="true">
 		<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" />

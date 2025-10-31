@@ -1,10 +1,10 @@
 import { sql } from 'kysely';
-import { getDatabase } from '$lib/server/db';
 import { error } from '@sveltejs/kit';
+import { getDatabase } from '$lib/server/db';
 import { getSession } from '$lib/server/query';
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 
-export const load: PageServerLoad = async (event) => {
+export const load: LayoutServerLoad = async (event) => {
 	const db = getDatabase();
 
 	const hotkeys = await db

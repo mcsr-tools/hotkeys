@@ -1,29 +1,26 @@
 <script lang="ts">
-	import { getHotkeysContext } from '$lib/hotkeys.context';
-	import { profileState } from '$lib/state.svelte';
+	import { getProfileContext, getVisualizerContext } from '$lib/context.svelte';
 
-	const ctx = getHotkeysContext();
+	const ctxVisualizer = getVisualizerContext();
+	const ctxProfile = getProfileContext();
 
-	let nickname = $state(profileState.nickname);
-
-	function commitNickname() {
-		profileState.nickname = nickname.trim();
+	function setName(name: string) {
+		ctxProfile.state.name = name.trim();
 	}
 </script>
 
 <div
 	class="flex h-full justify-center overflow-hidden bg-contain bg-position-[center_2.125rem] bg-no-repeat pt-1.5"
-	style={`background-image: url(https://nmsr.nickac.dev/bust/${profileState.nickname})`}
+	style={`background-image: url(https://nmsr.nickac.dev/bust/${ctxProfile.state.name})`}
 >
 	<div class="text-sm text-neutral-100 xl:text-xl">
 		<input
 			class="inline-block text-center font-mc"
 			type="text"
-			disabled={ctx && !ctx.isEditable('profile')}
-			bind:value={nickname}
-			defaultValue={nickname}
-			onblur={commitNickname}
-			onkeydown={(e) => e.key === 'Enter' && commitNickname()}
+			disabled={ctxVisualizer && !ctxVisualizer.isEditable('profile')}
+			value={ctxProfile.state.name}
+			onblur={(e) => setName(e.currentTarget.value)}
+			onkeydown={(e) => e.key === 'Enter' && setName(e.currentTarget.value)}
 		/>
 	</div>
 </div>
