@@ -41,4 +41,8 @@
 	});
 </script>
 
+<svelte:head>
+	<meta name="robots" content="noindex, noarchive" />
+</svelte:head>
+
 <Visualizer />
