@@ -4,6 +4,25 @@
 	--background: #3a405a;
 }
 
+@theme {
+	--font-mc: 'Minecraft';
+	--color-mc: #228b22;
+}
+
+@layer components {
+	.action-bar {
+		@apply mt-14 inline-flex h-18 items-center gap-2.5 rounded-xl bg-neutral-950/75 px-6 py-3 text-neutral-200;
+	}
+
+	.btn {
+		@apply rounded-2xl bg-linear-to-r from-emerald-200 to-emerald-50 px-3 py-1 font-light text-neutral-800 drop-shadow-lg transition-all hover:cursor-pointer hover:from-emerald-300 hover:to-emerald-100 hover:drop-shadow-xl;
+	}
+
+	.input-color {
+		@apply size-8 rounded-full border-2 border-white hover:cursor-pointer;
+	}
+}
+
 body::before {
 	content: '';
 	position: fixed;
@@ -51,4 +70,11 @@ input[type='color']::-webkit-color-swatch-wrapper {
 
 input[type='color']::-webkit-color-swatch {
 	border: none;
+}
+
+@font-face {
+	font-family: 'Minecraft';
+	font-style: normal;
+	font-weight: normal;
+	src: url('$lib/assets/MinecraftRegular.otf');
 }

@@ -1,8 +1,15 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { getHotkeysContext, getUiContext } from '$lib/context.svelte';
 	import * as H from '$lib/components/hotkeys';
 	import * as M from '$lib/components/hotkeys/macro';
-	import { hotkeysState } from '$lib/state.svelte';
+
+	const ctxUi = getUiContext();
+	const ctxHotkeys = getHotkeysContext();
+
+	$effect(() => {
+		document.body.style.setProperty('--background', ctxUi.state.background);
+	});
 </script>
 
 <H.Root>
@@ -10,25 +17,25 @@
 		<H.Profile />
 	</H.Cell>
 	<H.Cell size={1}>
-		<H.Bind option="Drop item" bind:key={hotkeysState.dropItem} />
+		<H.Bind option="Drop item" bind:key={ctxHotkeys.state.dropItem} />
 	</H.Cell>
 	<H.Cell size={1}>
-		<H.Bind option="Inventory" bind:key={hotkeysState.inventory} />
+		<H.Bind option="Inventory" bind:key={ctxHotkeys.state.inventory} />
 	</H.Cell>
 	<H.Cell size={1}>
-		<H.Bind option="Perspective" bind:key={hotkeysState.perspective} />
+		<H.Bind option="Perspective" bind:key={ctxHotkeys.state.perspective} />
 	</H.Cell>
 	<H.Cell size={1}>
-		<H.Bind option="Sneak" bind:key={hotkeysState.sneak} />
+		<H.Bind option="Sneak" bind:key={ctxHotkeys.state.sneak} />
 	</H.Cell>
 	<H.Cell size={1}>
-		<H.Bind option="Sprint" bind:key={hotkeysState.sprint} />
+		<H.Bind option="Sprint" bind:key={ctxHotkeys.state.sprint} />
 	</H.Cell>
 	<H.Cell size={1}>
-		<H.Bind option="F3" bind:key={hotkeysState.f3} />
+		<H.Bind option="F3" bind:key={ctxHotkeys.state.f3} />
 	</H.Cell>
 	<H.Cell size={1}>
-		<H.Bind option="Chat" bind:key={hotkeysState.chat} />
+		<H.Bind option="Chat" bind:key={ctxHotkeys.state.chat} />
 	</H.Cell>
 
 	<H.Cell size={2}>
@@ -54,8 +61,7 @@
 		class="flex items-end justify-end overflow-visible bg-transparent backdrop-blur-none"
 	>
 		<p class="col-span-full text-sm font-extralight text-amber-950 xl:text-xl">
-			<a class="underline" href={resolve('/')}>mcsr.tools/hotkeys</a> •
-			<a class="underline" href="https://github.com/mcsr-tools/hotkeys" target="_blank"> source </a>
+			<a href={resolve('/')}>mcsr.tools/hotkeys</a>
 		</p>
 	</H.Cell>
 </H.Root>
